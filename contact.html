@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+   <link rel="stylesheet" href="style.css">
+
+
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">Portfolio</a>
+
+        <i class='bx bx-menu' id="menu-icon"></i>
+
+        <nav class="navbar">
+            <a href="home.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="portfolio.html">Project</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+<!-- Contact Section Design -->
+<section class="contact" id="contact">
+    <h2 class="heading">Contact <span>Us!</span></h2>
+   
+        <form onsubmit="myfunc(event)">
+        <div class="input-box">
+            <input type="text" id="full_name" placeholder="Full Name">
+            <input type="email" id="email_id" placeholder="Email Address">    
+        </div>
+        <div class="input-box">
+            <input type="number" id="mobile_number" placeholder="Mobile Number">
+            <input type="text" id="email_subject" placeholder="Email Subject">    
+        </div>
+        <textarea name="message" id="your_message" cols="30" rows="10" placeholder="Your Message"></textarea>
+        <input type="submit" value="Send Message" class="btn">
+        </form>
+    </section>
+   
+    
+   <script>
+function myfunc(event) {
+    event.preventDefault();
+
+    const full_name = document.getElementById("full_name").value.trim();
+    const email_id = document.getElementById("email_id").value.trim();
+    const mobile_number = document.getElementById("mobile_number").value.trim();
+    const email_subject = document.getElementById("email_subject").value.trim();
+    const your_message = document.getElementById("your_message").value.trim();
+
+    if (!full_name || !email_id || !mobile_number || !email_subject || !your_message) {
+        alert("Please fill in all the fields.");
+        return;
+    }
+
+    const params = {
+        full_name: full_name,
+        email_id: email_id,
+        mobile_number: mobile_number,
+        email_subject: email_subject,
+        your_message: your_message
+    };
+
+    emailjs.send('service_mansi', 'template_contact', params)
+    .then(function(response) {
+        alert("✅ Your message has been sent successfully!");
+        document.querySelector("form").reset();
+    }, function(error) {
+        console.error(error);
+        alert("❌ Failed to send message. Please try again later.");
+    });
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+  // Replace 'YOUR_PUBLIC_KEY' with your actual key from EmailJS dashboard
+  emailjs.init('ta-JBa3q3GDLBcLpk');
+</script>
+
+
+</body>
+</html>    
